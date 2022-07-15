@@ -23,10 +23,12 @@ const config = {
         host: "localhost",
     },
     plugins: [
+        new CleanWebpackPlugin(),
+
         new HtmlWebpackPlugin({
             template: "index.html",
         }),
-        new CleanWebpackPlugin(),
+        
         new CopyWebpackPlugin({
             patterns: [
                 {
@@ -92,7 +94,6 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = "production";
-        config.devtool = "source-map";
     } else {
         config.mode = "development";
         config.devtool = "source-map";
