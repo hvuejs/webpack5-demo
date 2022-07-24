@@ -3,19 +3,22 @@
     "lib": [
         "ES5",
         "DOM",
-        "DOM.Iterable"
+        "DOM.Iterable",
     ],
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "esnext",
     "target": "es5",
     "allowJs": true,
-    "declaration": true,
-    "declarationDir": "types",
     "strict": true,
     // "noEmit":true, // 不输出文件，只做类型检查
-    "suppressImplicitAnyIndexErrors": true // 支持 el["onclick"] 这种写法
+    "suppressImplicitAnyIndexErrors": true, // 支持 el["onclick"] 这种写法
+    // <!-- 输出 .d.ts 文件
+    "declaration": true,
+    "declarationDir": "types",
+    // -->
   },
-  "files": ["src/index.ts"],
-  "exclude": ["node_modules", "dist"]
+//   "files": ["src/index.ts"],
+  "include": ["src/**/*.ts", "typings/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", "scripts"]
 }

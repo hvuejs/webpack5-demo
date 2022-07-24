@@ -8,19 +8,17 @@ export declare function a(): string;
  * @return {*}
  */
 export declare function b(): string;
-export interface HTMLElementPlus extends HTMLElement {
-    attachEvent?(type: string, cb: Function): void;
-}
 /**
  * @description: 事件监听
  * @param {HTMLElement} el
  * @param {string} type
- * @param {Function} cb
+ * @param { EventListenerOrEventListenerObject } cb
  */
+export declare function addEvents(el: HTMLElement, type: string, cb: EventListenerOrEventListenerObject): void;
 /**
  * @description:
  * @param {HTMLElement} el
  * @param {string} type
- * @param {EventListener} cb
+ * @param {EventListenerOrEventListenerObject} cb
  */
-export declare function addEvent(el: HTMLElement, type: string, cb: EventListener): void;
+export declare function addEvent(el: HTMLElement, type: string, cb: EventListenerOrEventListenerObject): void;

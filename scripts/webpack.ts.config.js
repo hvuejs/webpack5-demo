@@ -12,10 +12,12 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-    entry: "./src/index.ts",
+    entry: path.resolve(__dirname, "../src/index.ts"),
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "../dist"),
         libraryTarget: "umd",
+        libraryExport: 'default',
+        globalObject: 'this',
     },
     target: ["web", "es5"],
     devServer: {
@@ -32,7 +34,7 @@ const config = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname + "/static"),
+                    from: path.resolve(__dirname, "../static"),
                     to: "./static",
                     globOptions: {
                         dot: true,
@@ -53,22 +55,23 @@ const config = {
     ],
     module: {
         rules: [
-            // 使用 babel 后就不能在使用 ts-loader
+            // 使用 ts-loader + babel-loader 
             {
                 test: /\.(ts|tsx)$/i,
                 loader: "ts-loader",
-                exclude: ["/node_modules/"],
+                exclude: /node_modules/,
             },
-            /**
-             *  1. 如果没有使用 Babel，首选 TypeScript 自带编译器（配合 ts-loader 使用）
-             *  2. 如果项目中有 Babel，安装 @babel/preset-typescript，配合 tsc 做类型检查
-             *  3. 注意：两种编译器不要混用
-             */
-            // {
-            //     test: /\.(ts|js)x?$/,
-            //     loader: "babel-loader",
-            //     exclude: ["/node_modules/"],
-            // },
+            {
+                test: /\.js$/, //用正则匹配文件，用require或者import引入的都会匹配到
+                loader: 'babel-loader',
+                // use: {
+                //     loader: 'babel-loader',
+                //     options: {
+                //         presets: ['@babel/preset-env']
+                //     }
+                // }, //加载器名，就是上一步安装的loader
+                exclude: /node_modules/, //排除node_modules目录，我们不加载node模块中的js哦~
+            },
             {
                 test: /\.less$/i,
                 use: [stylesHandler, "css-loader", "postcss-loader", "less-loader"],

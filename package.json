@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "My webpack project",
   "scripts": {
-    "build": "webpack --mode=production --node-env=production",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch",
-    "serve": "webpack serve",
+    "build:ts": "webpack --config scripts/webpack.ts.config.js",
+    "build:babel": "webpack --config scripts/webpack.babel.config.js",
+    "build:babel2": "webpack --config scripts/webpack.babel_2.config.js",
+    "build:prod": "webpack --mode=production --node-env=production --config scripts/webpack.babel.config.js",
+    "watch": "webpack --watch --config scripts/webpack.babel.config.js",
+    "serve": "webpack serve --config scripts/webpack.babel.config.js",
     "check-type": "tsc --watch"
   },
   "keywords": [],

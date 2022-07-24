@@ -1,4 +1,6 @@
 import "./base.less";
+import "./pick";
+
 import { b, addEvent } from "./utils"
 console.log("Hello " + b());
 const btn: HTMLButtonElement = document.getElementsByTagName("button")[0];
